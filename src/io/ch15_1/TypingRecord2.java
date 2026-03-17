@@ -4,9 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Scanner;
 
-public class TypingRecord {
+public class TypingRecord2 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         Scanner sc = new Scanner(System.in);
 
@@ -26,26 +26,30 @@ public class TypingRecord {
 
     } // end of main
 
-    private static void printRecord() {
+    private static void printRecord() throws Exception {
         System.out.println("\n===저장된 기록 ===");
         try (FileInputStream fin = new FileInputStream("typing_record.txt")) {
             int data;
-            int count = 0;
+            int lineNumber = 1; // 현재 출력중인 줄 번호
+            // StringBuilder: 문자를 하나씩 이어붙이는 가변 문자열 버퍼
+            // String += "가" 를 반복하면 매번 새로운 객체가 생겨 느림 --> StringBuilder를 사용
             StringBuilder sb = new StringBuilder();
+
             while ((data = fin.read()) != -1) {
-                if ((char)data == '\n') {
-                    count++;
-                    System.out.println(count + "번 기록: " + sb);
-                    sb.delete(0, sb.length());
+                System.out.print((char) data);
+
+                // 출력할 때 만약 \n(개행문자)가 들어온다면 카운트 1씩 올리겠다
+                if((char)data == '\n') {
+                    // 개행 문자(\n)을 만났다 == 한줄이 끝났다.
+                    lineNumber++;
                 } else {
+                    // 개행문자(\n)이 아니라면 StringBuilder에 계속 이어붙임
                     sb.append((char)data);
                 }
+            } // end of while
 
-            }
-            System.out.print("총 " + count + "개의 기록이 있습니다.");
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("\n" + sb.toString());
+            System.out.println("총 " +lineNumber + "개의 기록이 있습니다.");
         }
     }
 
