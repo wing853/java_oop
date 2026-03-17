@@ -16,7 +16,7 @@ public class TypingRecord {
         System.out.print("선택 : ");
         String choice = sc.nextLine();
 
-        if(choice.equals("1")) {
+        if (choice.equals("1")) {
             saveRecord(sc);
         } else if (choice.equals("2")) {
             printRecord();
@@ -30,7 +30,7 @@ public class TypingRecord {
         System.out.println("\n===저장된 기록 ===");
         try (FileInputStream fin = new FileInputStream("typing_record.txt")) {
             int data;
-            while ( (data = fin.read()) != -1 ) {
+            while ((data = fin.read()) != -1) {
                 System.out.print((char) data);
             }
         } catch (Exception e) {
