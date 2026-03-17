@@ -1,3 +1,4 @@
-안녕 반가워 가나다라마바사
-오늘의 날씨가 그럭저럭 
-hello
+The quick brown fox
+jumps over the lazy
+dog
+nice to meet you

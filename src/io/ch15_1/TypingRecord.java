@@ -30,9 +30,20 @@ public class TypingRecord {
         System.out.println("\n===저장된 기록 ===");
         try (FileInputStream fin = new FileInputStream("typing_record.txt")) {
             int data;
+            int count = 0;
+            StringBuilder sb = new StringBuilder();
             while ((data = fin.read()) != -1) {
-                System.out.print((char) data);
+                if (data == '\n') {
+                    count++;
+                    System.out.println(count + "번 기록 " + sb);
+                    sb.delete(0, sb.length());
+                } else {
+                    sb.append((char) data);
+                }
+
             }
+            System.out.print("총 " + count + "개의 기록이 있습니다.");
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
