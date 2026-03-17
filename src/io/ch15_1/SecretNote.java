@@ -5,7 +5,8 @@ import java.io.FileOutputStream;
 import java.util.Scanner;
 
 public class SecretNote {
-   static int keyValue;
+    static int keyValue;
+
     public static void main(String[] args) {
 
         // 1. 키보드에서 값을 받아야 한다
@@ -33,11 +34,12 @@ public class SecretNote {
     } // end of main
 
     private static void readMemo(Scanner scan) {
+        System.out.print("복호화 키: ");
+        keyValue = scan.nextInt();
+
         System.out.println("\n=== 복호화 된 메모 ===");
         try (FileInputStream fis = new FileInputStream("secrect.txt")) {
             int data;
-            System.out.print("복호화 키: ");
-            keyValue = scan.nextInt();
             while ((data = fis.read()) != -1) {
                 System.out.print((char) (data - keyValue));
             }
@@ -65,7 +67,7 @@ public class SecretNote {
 
             fos.write(encrypted);
             // fos.flush(); -> fos.close 호출 시 자동 호출 flush()
-            System.out.println("각 문자에 " + keyValue +"를 더해서 저장");
+            System.out.println("각 문자에 " + keyValue + "를 더해서 저장");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

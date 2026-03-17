@@ -35,7 +35,7 @@ public class TypingRecord {
             while ((data = fin.read()) != -1) {
                 if (data == '\n') {
                     count++;
-                    System.out.println(count + "번 기록 " + sb);
+                    System.out.println(count + "번 기록: " + sb);
                     sb.delete(0, sb.length());
                 } else {
                     sb.append((char) data);
