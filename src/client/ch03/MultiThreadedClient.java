@@ -11,7 +11,7 @@ public class MultiThreadedClient {
 
     public static void main(String[] args) {
 
-        try (Socket socket = new Socket("localhost", 5000)) {
+        try (Socket socket = new Socket("192.168.4.101", 5000)) {
 
             // 소캣에서 연결 할 입력, 출력 스트림 2개가 필요
             PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
