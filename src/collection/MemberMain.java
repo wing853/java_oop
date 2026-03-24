@@ -1,5 +1,4 @@
-import collection.Member;
-import collection.MemberRepository;
+package collection;
 
 import java.util.List;
 import java.util.Scanner;
