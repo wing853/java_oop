@@ -43,7 +43,7 @@ public class WeatherApp {
 
                 Gson gson = new Gson();
                 WeatherAppDTO weatherAppDTO = gson.fromJson(response.toString(), WeatherAppDTO.class);
-                System.out.println("상태: " + weatherAppDTO.getWeather().getFirst().getDescription());
+                System.out.println("상태: " + weatherAppDTO.getWeather().get(0).getDescription());
                 System.out.println("기온: " + weatherAppDTO.getMain().getTemp() + "°C");
                 System.out.println("습도: " + weatherAppDTO.getMain().getHumidity() + "%");
                 System.out.println("풍속: " + weatherAppDTO.getWind().getSpeed() + "m/s");
