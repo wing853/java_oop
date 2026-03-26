@@ -1,37 +1,37 @@
 package http.api;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URLEncoder;
 
 public class AirClient {
 
     private static final String SERVICE_KEY = "d439493b168b27443cf338c7130bc9eb2217b470390037bc70979e84dc6668ce";
     private static final String BASE_URL = "http://apis.data.go.kr/B552584/UlfptcaAlarmInqireSvc/getUlfptcaAlarmInfo";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
         getAirData();
     } // end of main
 
-    private static void getAirData() {
-        String urlString = BASE_URL +
-                "?serviceKey=" + SERVICE_KEY +
-                "&returnType=json" +
-                "&numOfRows=2" +
-                "&pageNo=1" +
-                "&year=2025";
+    private static void getAirData() throws UnsupportedEncodingException {
+        StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552584/UlfptcaAlarmInqireSvc/getUlfptcaAlarmInfo"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=d439493b168b27443cf338c7130bc9eb2217b470390037bc70979e84dc6668ce"); /*Service Key*/
+        urlBuilder.append("&" + URLEncoder.encode("returnType","UTF-8") + "=" + URLEncoder.encode("json", "UTF-8")); /*xml 또는 json*/
+        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("2", "UTF-8")); /*한 페이지 결과 수*/
+        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+        urlBuilder.append("&" + URLEncoder.encode("year","UTF-8") + "=" + URLEncoder.encode("2025", "UTF-8")); /*측정 연도*/
+        urlBuilder.append("&" + URLEncoder.encode("itemCode","UTF-8") + "=" + URLEncoder.encode("PM10", "UTF-8")); /*미세먼지 항목 구분(PM10, PM25), PM10/PM25 모두 조회할 경우 파라미터 생략*/
         HttpURLConnection connection;
 
         try {
-            URL url = new URL(urlString);
+            URL url = new URL(urlBuilder.toString());
 
             connection = (HttpURLConnection) url.openConnection();
 
@@ -62,6 +62,6 @@ public class AirClient {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
+    } // end of getAirData()
 
 } // end of class
