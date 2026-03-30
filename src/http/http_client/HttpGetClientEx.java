@@ -29,7 +29,7 @@ public class HttpGetClientEx {
 
             // 4. 응답 내용 확인(로깅) -> Http 응답 메세지
             System.out.println("response: " + response);
-            System.out.println("resoponsL " + response.body());
+            System.out.println("response: " + response.body());
 
             // 5. 파싱처리하기
             Post post = gson.fromJson(response.body(), Post.class);
